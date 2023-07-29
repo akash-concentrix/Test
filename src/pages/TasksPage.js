@@ -29,8 +29,6 @@ import { TASK_LIST } from "../utils/apis";
 
 const TABLE_HEAD = [
     { id: 'campaign_name', label: 'Campaign Name', alignRight: false },
-    // { id: 'promotion_link', label: 'Promotion Link', alignRight: false },
-    // { id: 'description', label: 'Description', alignRight: false },
     { id: 'channel', label: 'Channel', alignRight: false },
     { id: 'deadline', label: 'Deadline', alignRight: false },
     { id: 'promoter_name', label: 'Promoter Name', alignRight: false },
@@ -89,7 +87,7 @@ const TaskListPage = (props) => {
         const fetchTaskList = async () => {
             const response = await fetch(TASK_LIST);
             const data = await response.json();
-            return data;
+            return data.results;
         };
 
         const fetchData = async () => {
