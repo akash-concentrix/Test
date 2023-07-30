@@ -1,21 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// @mui
+
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-// components
+
 import Iconify from '../../../components/iconify';
 
-// ----------------------------------------------------------------------
-
-export default function LoginForm() {
-  const navigate = useNavigate();
-
+const LoginForm = (props) => {
+  const { handleLogin } = props;
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleClick = () => {
-    navigate('/dashboard', { replace: true });
-  };
 
   return (
     <>
@@ -45,9 +37,11 @@ export default function LoginForm() {
         </Link>
       </Stack>
 
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
+      <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleLogin}>
         Login
       </LoadingButton>
     </>
   );
 }
+
+export default LoginForm;

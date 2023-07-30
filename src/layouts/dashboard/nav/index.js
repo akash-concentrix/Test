@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-// @mui
+
 import { styled, alpha } from '@mui/material/styles';
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
-// mock
+import { Box, Link, Drawer, Typography, Avatar } from '@mui/material';
+
 import account from '../../../_mock/account';
-// hooks
+
 import useResponsive from '../../../hooks/useResponsive';
-// components
+
 import Logo from '../../../components/logo';
 import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
-//
+
 import navConfig from './config';
 
-// ----------------------------------------------------------------------
 
 const NAV_WIDTH = 280;
 
@@ -26,8 +25,6 @@ const StyledAccount = styled('div')(({ theme }) => ({
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
   backgroundColor: alpha(theme.palette.grey[500], 0.12),
 }));
-
-// ----------------------------------------------------------------------
 
 Nav.propTypes = {
   openNav: PropTypes.bool,
@@ -43,8 +40,7 @@ export default function Nav({ openNav, onCloseNav }) {
     if (openNav) {
       onCloseNav();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [onCloseNav, openNav, pathname]);
 
   const renderContent = (
     <Scrollbar
