@@ -5,27 +5,32 @@ import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@m
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/iconify';
+import { useAuth } from 'src/providers/auth';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const auth = useAuth();
 
   const handleClick = () => {
-    navigate('/dashboard', { replace: true });
+    auth.login(email);
+    navigate('/dashboard/app', { replace: true });
   };
 
   return (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField name="email" label="Email address" onChange={(value) => setEmail(value)} />
 
         <TextField
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
+          onChange={(value) => setPassword(value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
