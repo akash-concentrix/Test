@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-//
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
@@ -14,7 +14,7 @@ const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<QueryClientProvider client={queryClient}><App /></QueryClientProvider>);
+root.render(<QueryClientProvider client={queryClient}><App /><ReactQueryDevtools /></QueryClientProvider>);
 
 // If you want to enable client cache, register instead.
 serviceWorker.unregister();

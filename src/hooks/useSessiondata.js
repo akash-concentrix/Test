@@ -1,10 +1,10 @@
 import { useQuery, useMutation } from 'react-query';
-import { fetchSessiondData } from '../apis/session';
+import { fetchSessionData } from '../apis/session';
+
 import { login } from '../apis/login';
 
 export function useSessionData() {
-  const { data, isLoading, isError, error } = useQuery('sessionData', fetchSessiondData);
-
+  const { data, isLoading, isError, error } = useQuery('sessionData', fetchSessionData);
   return { data, isLoading, isError, error };
 }
 

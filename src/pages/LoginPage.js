@@ -1,7 +1,9 @@
 import { Helmet } from 'react-helmet-async';
-
 import { styled } from '@mui/material/styles';
 import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
+import { ToastContainer } from "react-toastify";
+import { useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 import useResponsive from '../hooks/useResponsive';
 
@@ -10,6 +12,10 @@ import Iconify from '../components/iconify';
 
 import { LoginForm } from '../sections/auth/login';
 import { useLogin } from '../hooks/useSessiondata';
+
+import { showNotification } from "../components/notification";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -40,14 +46,30 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 const LoginPage = () => {
   const mdUp = useResponsive('up', 'md');
-  const login = useLogin();
+  const loginMutation = useLogin();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate()
 
-  const handleLogin = (username, password) => {
-    login.mutate({ username, password });
+  const handleLogin = async (email, password) => {
+    try {
+      await loginMutation.mutateAsync({ email, password }, {
+        onSuccess: (data) => {
+          queryClient.setQueryData('token', data);
+          localStorage.setItem('token', JSON.stringify(data));
+          showNotification('success', 'Welcome', 2000);
+          navigate("/dashboard");
+        },
+      });
+    } catch (error) {
+      const message = `Login failed: ${error?.response?.data?.detail}`
+      showNotification('error', message, 'Login Failed', 5000);
+    }
   };
 
   return (
     <>
+      <ToastContainer />
+      {loginMutation.isLoading}
       <Helmet>
         <title> Login | Minimal UI </title>
       </Helmet>
