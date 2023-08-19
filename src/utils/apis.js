@@ -1,2 +1,2 @@
 
-export const TASK_LIST = `http://localhost:8000/smm/api/v1/campaign-items/`
+export const TASK_LIST = `https://naveenslog.pythonanywhere.com/smm/api/v1/campaign-items/`
