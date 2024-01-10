@@ -12,6 +12,7 @@ import ProductsPage from './pages/products';
 import DashboardAppPage from './pages/dashboard';
 import TaskListPage from './pages/tasks';
 import PrivateRoutes from './providers/privateRoutes';
+import Pricing from './pages/pricing';
 
 const Router = () => {
 
@@ -27,6 +28,7 @@ const Router = () => {
           <Route path='tasks' element={<TaskListPage />} />
           <Route path='products' element={<ProductsPage />} />
           <Route path='blog' element={<BlogPage />} />
+          <Route path='pricing' element={<Pricing />} />
         </Route>
       </Route>
 
